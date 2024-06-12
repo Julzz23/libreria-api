@@ -14,7 +14,7 @@ export class EditorialService {
     return this.editorialRepository.find();
   }
 
-  async findOne(id: number): Promise<Editorial> {
+  async findOne(id: number): Promise<Editorial | null> {
     return this.editorialRepository.findOne({ where: { id } });
   }
 

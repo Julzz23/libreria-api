@@ -6,6 +6,7 @@ import {
   Param,
   Put,
   Delete,
+  NotFoundException,
 } from '@nestjs/common';
 import { EditorialService } from './editorial.service';
 import { Editorial } from './editorial.entity';
@@ -22,7 +23,11 @@ export class EditorialController {
 
   @Get(':id')
   async findOne(@Param('id') id: string): Promise<Editorial> {
-    return this.editorialService.findOne(+id);
+    const editorial = await this.editorialService.findOne(+id);
+    if (!editorial) {
+      throw new NotFoundException(`Editorial with id ${id} not found`);
+    }
+    return editorial;
   }
 
   @Post()

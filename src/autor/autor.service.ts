@@ -15,7 +15,7 @@ export class AutorService {
     return this.autorRepository.find();
   }
 
-  async findOne(id: number): Promise<Autor> {
+  async findOne(id: number): Promise<Autor | null> {
     return this.autorRepository.findOne({ where: { id } });
   }
   async create(autor: Autor): Promise<Autor> {

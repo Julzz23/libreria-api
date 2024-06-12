@@ -40,9 +40,13 @@ export class LibroService {
   async create(libroData: Partial<Libro>): Promise<Libro> {
     const { autores, editorial, ...resto } = libroData;
 
-    const entidadesAutores = await this.autorRepository.findBy(autores);
-    if (entidadesAutores.length !== autores.length) {
+    const entidadesAutores = await this.autorRepository.findBy(autores ?? []);
+    if (autores && entidadesAutores.length !== autores.length) {
       throw new BadRequestException('Uno o más autores no encontrados');
+    }
+
+    if (!editorial) {
+      throw new BadRequestException('Editorial no proporcionada');
     }
 
     const entidadEditorial = await this.editorialRepository.findOne({
@@ -59,6 +63,9 @@ export class LibroService {
     });
 
     const fechaformateada = formatearFecha(nuevoLibro.fechaLanzamiento);
+    if (fechaformateada === null) {
+      throw new Error('Fecha de lanzamiento no válida');
+    }
     nuevoLibro.fechaLanzamiento = fechaformateada;
 
     return this.libroRepository.save(nuevoLibro);

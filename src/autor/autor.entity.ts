@@ -3,17 +3,17 @@ import { Entity, Column, PrimaryGeneratedColumn } from 'typeorm';
 @Entity()
 export class Autor {
   @PrimaryGeneratedColumn()
-  id: number;
+  id?: number;
 
   @Column()
-  nombre: string;
+  nombre!: string;
 
   @Column()
-  apellido: string;
+  apellido!: string;
 
   @Column({ unique: true })
-  dni: string;
+  dni!: string;
 
   @Column()
-  nacionalidad: string;
+  nacionalidad!: string;
 }
