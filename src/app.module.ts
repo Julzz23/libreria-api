@@ -7,9 +7,9 @@ import { EditorialModule } from './editorial/editorial.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'mssql',
+      type: 'postgres',
       host: 'localhost',
-      port: 1433,
+      port: 5432,
       username: 'julian',
       password: 'julian',
       database: 'libreria-node',
