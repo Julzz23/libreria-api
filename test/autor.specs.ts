@@ -2,7 +2,7 @@ import { Test, TestingModule } from '@nestjs/testing';
 import { AutorService } from '../src/autor/autor.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Autor } from '../src/autor/autor.entity';
-import { Repository, UpdateResult } from 'typeorm'; // Import UpdateResult from typeorm
+import { Repository, UpdateResult } from 'typeorm';
 
 describe('AutorService', () => {
   let servicio: AutorService;
