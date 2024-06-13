@@ -7,12 +7,12 @@ import { EditorialModule } from './editorial/editorial.module';
 @Module({
   imports: [
     TypeOrmModule.forRoot({
-      type: 'postgres',
+      type: 'mysql',
       host: 'localhost',
-      port: 5432,
-      username: 'julian',
+      port: 3306,
+      username: 'root',
       password: 'julian',
-      database: 'libreria-node',
+      database: 'libreria-api',
       entities: [__dirname + '/**/*.entity{.ts,.js}'],
       synchronize: true,
     }),
