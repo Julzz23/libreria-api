@@ -9,8 +9,10 @@ import {
 } from '@nestjs/common';
 import { LibroService } from './libro.service';
 import { Libro } from './libro.entity';
+import { ApiBody, ApiResponse, ApiTags } from '@nestjs/swagger';
 
 @Controller('libros')
+@ApiTags('libros')
 export class LibroController {
   constructor(private readonly libroService: LibroService) {}
 
@@ -25,6 +27,13 @@ export class LibroController {
   }
 
   @Post()
+  @ApiBody({ type: Libro, description: 'Crea un nuevo libro' })
+  @ApiResponse({
+    status: 201,
+    description: 'El libro ha sido creado exitosamente.',
+    type: Libro,
+  })
+  @ApiResponse({ status: 400, description: 'Datos inválidos.' })
   async create(@Body() libroData: Partial<Libro>): Promise<Libro> {
     return this.libroService.create(libroData);
   }
